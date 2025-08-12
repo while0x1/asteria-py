@@ -103,6 +103,8 @@ SHIP_MA = MultiAsset.from_primitive({bytes.fromhex(pilot_policy): {ship_name: 1 
 SHIP_FUEL_MA = MultiAsset.from_primitive({bytes.fromhex(pilot_policy): {ship_name: 1},bytes.fromhex(fuel_policy): {b'FUEL': 5 }})
 SHIP_PILOT_MA = MultiAsset.from_primitive({bytes.fromhex(pilot_policy): {ship_name: 1,pilot_name:1}})
 
+PILOT_MA = MultiAsset.from_primitive({bytes.fromhex(pilot_policy): {pilot_name: 1 }})
+
 
 #builder.add_minting_script(m1,mintRedeemer1)#0291
 builder.add_minting_script(ref_utxos[1],mintRedeemer2)#0291
