@@ -48,7 +48,8 @@ m1 = PlutusV3Script.fromhex('590dfc010100333333323232323232322322322223223225333
 OGMIOS_IP = '127.0.0.1'
 pilot_name = b'PILOT4'
 ship_name = b'SHIP4'
-
+START_X = 23
+START_Y = 27
 
 hdwallet = HDWallet.from_mnemonic(SEED)
 hdwallet_stake = hdwallet.derive_from_path("m/1852'/1815'/0'/2/0")
@@ -118,7 +119,7 @@ FUEL_MA = MultiAsset.from_primitive({bytes.fromhex(fuel_policy): {b'FUEL': 5 }})
 #signed_tx = Transaction(unsignedTx.transaction_body, TransactionWitnessSet(vkey_witnesses=vk_witnesses))
 validitySlot = chain_context.last_block_slot+300
 UTC_now = int((time.time() + 350 ) * 1000)
-createShipDatum = createShip(22,28,ship_name,pilot_name,UTC_now)
+createShipDatum = createShip(START_X,START_Y,ship_name,pilot_name,UTC_now)
 authDatumNew = authTokenDatum(ship_count + 1, bytes.fromhex(pilot_policy))
 
 ship_holding_address = Address.from_primitive('addr1wypfrtn6awhsvjmc24pqj0ptzvtfalang33rq8ng6j6y7scnlkytx')
