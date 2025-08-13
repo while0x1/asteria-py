@@ -80,7 +80,10 @@ userAddress = Address(payment_vkey.hash(),stake_vkey.hash(),network=Network.MAIN
 #userAddress = Address(payment_vkey.hash(),network=Network.MAINNET)
 if BLOCK_FROST_PROJECT_ID != None:
     print('Using Blockfrost for chain Context')
-    chain_context = BlockFrostChainContext(project_id=BLOCK_FROST_PROJECT_ID,base_url=ApiUrls.mainnet.value,)
+    try:
+        chain_context = BlockFrostChainContext(project_id=BLOCK_FROST_PROJECT_ID,base_url=ApiUrls.mainnet.value,)
+    except Exception as e:
+        print(e)
 else:
     print('No Blockfrost key found using ogmios for chain context')
     chain_context = OgmiosV6ChainContext(OGMIOS_IP,network=Network.MAINNET)
@@ -142,8 +145,15 @@ builder.add_output(TransactionOutput(ship_holding_address,Value(1500000,SHIP_FUE
 builder.add_output(TransactionOutput(auth_address,Value(auth_utxos[0].output.amount.coin + 1000000, auth_token), datum=authDatumNew))
 builder.add_output(TransactionOutput(userAddress,Value(1500000,PILOT_MA)))
 
+print(builder.inputs)
+print(builder.outputs)
+print(builder.redeemers())
+
 #builder.ttl= validitySlot
-signed_tx = builder.build_and_sign([payment_skey], userAddress,auto_validity_start_offset=0,auto_ttl_offset=300)
+try:
+    signed_tx = builder.build_and_sign([payment_skey], userAddress,auto_validity_start_offset=0,auto_ttl_offset=300)
+except Exception as e:
+    print(e)
 #ytx
 #gets shipNft Fuel Nfts and 
 chain_context.submit_tx(signed_tx.to_cbor())
