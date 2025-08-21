@@ -130,6 +130,7 @@ else:
     sys.exit()
 
 lower_validity_bound = int((time_diff_seconds) * -1 )  
+lower_validity_bound = 12096 * total_travel_dist * -1 
 #moveShipRedeemer = moveRedeemer(moveRedeemerXY(delta_x,delta_y))
 moveShipRedeemer = Redeemer(moveRedeemerXY(int(delta_x),int(delta_y)))
 builder.add_script_input(ship_utxo,script=ref_utxos[1],redeemer=moveShipRedeemer)
